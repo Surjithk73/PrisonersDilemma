@@ -143,6 +143,14 @@
     font-style: italic;
   }
 
+    .math-display {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 10px 0;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+  }
   /* ---------- Headings ---------- */
   h2 {
     margin: 34px 0 14px;
@@ -463,7 +471,7 @@ This progress report documents the complete implementation, rigorous mathematica
 The full application architecture is operational on a single-machine localhost setup with zero cloud dependencies. The client layer features a pitch-black, distraction-free React 19 single-page interface with millisecond-precision reaction timers, an interactive payoff matrix, and dynamic scoreboards. The application logic embeds a library of <strong>15 pure-algorithmic Axelrod tournament strategies</strong> and a cognitive profiling engine computing <strong>8 mathematically rigorous behavioral metrics</strong>. The backend layer leverages Fastify and SQLite configured with Write-Ahead Logging (<code>WAL</code>), guaranteeing zero-configuration local persistence and zero network-induced timing variance during active trials.
 </p>
 <p>
-Furthermore, empirical laboratory testing has been executed with <strong>$N=6$ student participants</strong>, verifying the reliability of the sub-millisecond reaction telemetry, mathematical metric derivations, transactional database commits, and post-session strategy recognition accuracy.
+Furthermore, empirical laboratory testing has been executed with <strong><i>N</i> = 6 student participants</strong>, verifying the reliability of the sub-millisecond reaction telemetry, mathematical metric derivations, transactional database commits, and post-session strategy recognition accuracy.
 </p>
 
 <div class="table-wrap">
@@ -522,10 +530,10 @@ Furthermore, empirical laboratory testing has been executed with <strong>$N=6$ s
 The Iterated Prisoner's Dilemma models the tension between individual rationality and collective welfare. In a standard two-player encounter, each player independently chooses either to <strong>Cooperate (C)</strong> or <strong>Defect (D)</strong>. Payoffs are awarded according to four standard outcomes:
 </p>
 <ul>
-  <li><strong>T (Temptation to Defect):</strong> Payoff when the participant defects while the opponent cooperates ($P_1 = D, P_2 = C$).</li>
-  <li><strong>R (Reward for Mutual Cooperation):</strong> Payoff when both players cooperate ($P_1 = C, P_2 = C$).</li>
-  <li><strong>P (Punishment for Mutual Defection):</strong> Payoff when both players defect ($P_1 = D, P_2 = D$).</li>
-  <li><strong>S (Sucker's Payoff):</strong> Payoff when the participant cooperates while the opponent defects ($P_1 = C, P_2 = D$).</li>
+  <li><strong>T (Temptation to Defect):</strong> Payoff when the participant defects while the opponent cooperates (<i>P</i><sub>1</sub> = D, <i>P</i><sub>2</sub> = C).</li>
+  <li><strong>R (Reward for Mutual Cooperation):</strong> Payoff when both players cooperate (<i>P</i><sub>1</sub> = C, <i>P</i><sub>2</sub> = C).</li>
+  <li><strong>P (Punishment for Mutual Defection):</strong> Payoff when both players defect (<i>P</i><sub>1</sub> = D, <i>P</i><sub>2</sub> = D).</li>
+  <li><strong>S (Sucker's Payoff):</strong> Payoff when the participant cooperates while the opponent defects (<i>P</i><sub>1</sub> = C, <i>P</i><sub>2</sub> = D).</li>
 </ul>
 
 <h3>1.1 The Two Cardinal Mathematical Inequalities</h3>
@@ -534,12 +542,12 @@ For an interaction matrix to constitute a genuine Prisoner's Dilemma that foster
 </p>
 <ol>
   <li><strong>The Defection Incentive Inequality:</strong>
-  $$T > R > P > S$$
-  In our standard laboratory baseline ($T=5, R=3, P=1, S=0$), this relationship is preserved ($5 > 3 > 1 > 0$). In any isolated single-shot encounter, Defect strictly dominates Cooperate: if the counterparty cooperates, defecting yields $T=5$ rather than $R=3$; if the counterparty defects, defecting yields $P=1$ rather than $S=0$. Hence, mutual defection $(D, D)$ is the unique Nash equilibrium in one-shot play.
+  <div class="math-display"><i>T</i> &gt; <i>R</i> &gt; <i>P</i> &gt; <i>S</i></div>
+  In our standard laboratory baseline (<i>T</i> = 5, <i>R</i> = 3, <i>P</i> = 1, <i>S</i> = 0), this relationship is preserved (5 &gt; 3 &gt; 1 &gt; 0). In any isolated single-shot encounter, Defect strictly dominates Cooperate: if the counterparty cooperates, defecting yields <i>T</i> = 5 rather than <i>R</i> = 3; if the counterparty defects, defecting yields <i>P</i> = 1 rather than <i>S</i> = 0. Hence, mutual defection (D, D) is the unique Nash equilibrium in one-shot play.
   </li>
   <li><strong>The Coordination / Repeated Interaction Condition:</strong>
-  $$2R > T + S$$
-  In our laboratory matrix, $2(3) = 6 > 5 + 0 = 5$. This second inequality is mathematically vital for longitudinal games: without it, two players could maximize joint payoffs by alternating between exploitation ($C, D$ on round $t$, and $D, C$ on round $t+1$), yielding an average of $\frac{T+S}{2}$ per round. Ensuring $2R > T+S$ guarantees that sustained mutual cooperation is strictly Pareto superior to alternating asymmetric exploitation.
+  <div class="math-display">2<i>R</i> &gt; <i>T</i> + <i>S</i></div>
+  In our laboratory matrix, <i>2(3) = 6 &gt; 5 + 0 = 5</i>. This second inequality is mathematically vital for longitudinal games: without it, two players could maximize joint payoffs by alternating between exploitation (C, D on round <i>t</i>, and D, C on round <i>t+1</i>), yielding an average of (<i>T</i> + <i>S</i>) / 2 per round. Ensuring 2<i>R</i> &gt; <i>T</i> + <i>S</i> guarantees that sustained mutual cooperation is strictly Pareto superior to alternating asymmetric exploitation.
   </li>
 </ol>
 
@@ -593,7 +601,7 @@ For an interaction matrix to constitute a genuine Prisoner's Dilemma that foster
       </tbody>
     </table>
   </div>
-  <div class="figure-caption">Figure 1: Programmatic rendering of the Prisoner's Dilemma decision rules and asymmetric payoff matrix satisfying $T > R > P > S$ and $2R > T+S$ (modeled after canonical game-theoretic simulators).</div>
+  <div class="figure-caption">Figure 1: Programmatic rendering of the Prisoner's Dilemma decision rules and asymmetric payoff matrix satisfying <i>T &gt; R &gt; P &gt; S</i> and 2<i>R</i> &gt; <i>T</i> + <i>S</i> (modeled after canonical game-theoretic simulators).</div>
 </div>
 
 <h3>1.2 Axelrod's Evolutionary Tournaments &amp; The Four Reciprocity Rules</h3>
@@ -609,24 +617,24 @@ Robert Axelrod’s landmark computer tournaments (1980, 1984) pitted algorithmic
 
 <h3>1.3 The Degradation of Cooperation Under Noise (The Trembling Hand)</h3>
 <p>
-In realistic environments, decisions are subject to communication error, misinterpretation, or mechanical failure—formally known in game theory as <em>trembling-hand perfection</em> (Selten, 1975). When a noise probability $p > 0$ is introduced:
+In realistic environments, decisions are subject to communication error, misinterpretation, or mechanical failure—formally known in game theory as <em>trembling-hand perfection</em> (Selten, 1975). When a noise probability <i>p</i> &gt; 0 is introduced:
 </p>
 <p>
-If two deterministic <em>Tit for Tat</em> agents play in a noiseless channel, mutual cooperation persists indefinitely. However, if a single transmission error flips a planned $C$ into an accidental $D$, it triggers an endless retaliatory echo: Player 2 retaliates against Player 1's apparent betrayal; Player 1 then retaliates against Player 2's retaliation, locking the pair into an unending cycle of alternating or mutual defection ($C-D \leftrightarrow D-C$).
+If two deterministic <em>Tit for Tat</em> agents play in a noiseless channel, mutual cooperation persists indefinitely. However, if a single transmission error flips a planned <i>C</i> into an accidental <i>D</i>, it triggers an endless retaliatory echo: Player 2 retaliates against Player 1's apparent betrayal; Player 1 then retaliates against Player 2's retaliation, locking the pair into an unending cycle of alternating or mutual defection (<i>C-D &le;ftrightarrow D-C</i>).
 </p>
 <p>
 To model human adaptation under noise, our platform implements two resilient theoretical counter-strategies:
 </p>
 <ul>
-  <li><strong>Generous Tit for Tat:</strong> Maintains standard reciprocity, but upon an opponent defection, stochastically forgives with probability $q = 10\%$. This breaks destructive retaliation cycles without sacrificing overall deterrence.</li>
-  <li><strong>Pavlov (Win-Stay, Lose-Shift):</strong> Repeats its previous move if it received a favorable payoff ($T$ or $R$), but switches actions if it received an unfavorable outcome ($P$ or $S$). If noise causes Pavlov and a cooperator to defect mutually ($P=1$), both shift to cooperation on the subsequent round, self-correcting the system.</li>
+  <li><strong>Generous Tit for Tat:</strong> Maintains standard reciprocity, but upon an opponent defection, stochastically forgives with probability <i>q</i> = 10%. This breaks destructive retaliation cycles without sacrificing overall deterrence.</li>
+  <li><strong>Pavlov (Win-Stay, Lose-Shift):</strong> Repeats its previous move if it received a favorable payoff (<i>T</i> or <i>R</i>), but switches actions if it received an unfavorable outcome (<i>P</i> or <i>S</i>). If noise causes Pavlov and a cooperator to defect mutually (<i>P</i> = 1), both shift to cooperation on the subsequent round, self-correcting the system.</li>
 </ul>
 
 <h3>1.4 Cognitive Psychology &amp; Neural Processing Foundations</h3>
 <ul>
   <li><strong>Dual-Process Theory &amp; Social Heuristics:</strong> Drawing on the Social Heuristics Hypothesis (Rand et al., 2012, <em>Nature</em>), human cooperation is often driven by automatic, intuitive processing (System 1), whereas calculated defection requires deliberative cognitive reflection (System 2). Our sub-millisecond reaction latency engine isolates these processing differentials.</li>
-  <li><strong>Bounded Rationality &amp; Working Memory:</strong> Herbert Simon (1955) noted that agents operate within severe computational constraints. In iterated play, participants track $N$-back opponent history. When cognitive load increases, subjects revert to simplified heuristic rules (e.g., direct mimicry or majority polling).</li>
-  <li><strong>Prospect Theory &amp; Loss Aversion:</strong> Kahneman &amp; Tversky (1979) proved that losses loom larger than equivalent gains. The fear of experiencing the Sucker's payoff ($S$) induces an asymmetric psychological penalty compared to the pleasure of the Temptation reward ($T$).</li>
+  <li><strong>Bounded Rationality &amp; Working Memory:</strong> Herbert Simon (1955) noted that agents operate within severe computational constraints. In iterated play, participants track <i>N</i>-back opponent history. When cognitive load increases, subjects revert to simplified heuristic rules (e.g., direct mimicry or majority polling).</li>
+  <li><strong>Prospect Theory &amp; Loss Aversion:</strong> Kahneman &amp; Tversky (1979) proved that losses loom larger than equivalent gains. The fear of experiencing the Sucker's payoff (<i>S</i>) induces an asymmetric psychological penalty compared to the pleasure of the Temptation reward (<i>T</i>).</li>
   <li><strong>Theory of Mind &amp; Metacognitive Mentalising:</strong> Successful strategic interaction requires attributing mental models and intentionality to the opponent (Frith &amp; Frith, 2005). The platform quantifies this via a structured post-session strategy recognition task.</li>
 </ul>
 
@@ -703,22 +711,22 @@ All 15 opponent strategies are implemented as pure, immutable TypeScript functio
     <tbody>
       <tr>
         <td><strong>1. Tit for Tat</strong></td>
-        <td>Cooperates on round 1 ($t=1 \implies C$). For all $t > 1$, plays $M_{opponent}[t-1]$.</td>
+        <td>Cooperates on round 1 (<i>t</i> = 1 &rarr; C). For all <i>t</i> &gt; 1, plays <i>M</i><sub>opponent</sub>[<i>t</i> - 1].</td>
         <td>Strictly Reciprocal, Nice, Clear</td>
       </tr>
       <tr>
         <td><strong>2. Generous Tit for Tat</strong></td>
-        <td>Cooperates on round 1. If opponent defected at $t-1$, cooperates with probability $p=0.10$, otherwise defect.</td>
+        <td>Cooperates on round 1. If opponent defected at <i>t</i> - 1, cooperates with probability <i>p</i> = 0.10, otherwise defect.</td>
         <td>Noise-Resilient, Generous</td>
       </tr>
       <tr>
         <td><strong>3. Suspicious Tit for Tat</strong></td>
-        <td>Defects on round 1 ($t=1 \implies D$). For all $t > 1$, plays $M_{opponent}[t-1]$.</td>
+        <td>Defects on round 1 (<i>t</i> = 1 &rarr; D). For all <i>t</i> &gt; 1, plays <i>M</i><sub>opponent</sub>[<i>t</i> - 1].</td>
         <td>Cynical, Provocative Reciprocal</td>
       </tr>
       <tr>
         <td><strong>4. Two Tits for Tat</strong></td>
-        <td>Defects if opponent defected in <em>either</em> of the preceding two rounds ($t-1$ or $t-2$).</td>
+        <td>Defects if opponent defected in <em>either</em> of the preceding two rounds (<i>t</i> - 1 or <i>t</i> - 2).</td>
         <td>Hyper-Punitive Retaliator</td>
       </tr>
       <tr>
@@ -728,32 +736,32 @@ All 15 opponent strategies are implemented as pure, immutable TypeScript functio
       </tr>
       <tr>
         <td><strong>6. Pavlov</strong></td>
-        <td>Cooperates on round 1. Repeats choice if payoff was $T$ or $R$; switches if payoff was $P$ or $S$.</td>
+        <td>Cooperates on round 1. Repeats choice if payoff was <i>T</i> or <i>R</i>; switches if payoff was <i>P</i> or <i>S</i>.</td>
         <td>Win-Stay, Lose-Shift Heuristic</td>
       </tr>
       <tr>
         <td><strong>7. Always Cooperate</strong></td>
-        <td>Unconditionally selects $C$ on every round.</td>
+        <td>Unconditionally selects <i>C</i> on every round.</td>
         <td>Altruistic / Exploitable Baseline</td>
       </tr>
       <tr>
         <td><strong>8. Always Defect</strong></td>
-        <td>Unconditionally selects $D$ on every round.</td>
+        <td>Unconditionally selects <i>D</i> on every round.</td>
         <td>Pure Egoist / Malicious Baseline</td>
       </tr>
       <tr>
         <td><strong>9. Random</strong></td>
-        <td>Selects $C$ or $D$ with equal probability ($p = 0.50$).</td>
+        <td>Selects <i>C</i> or <i>D</i> with equal probability (<i>p</i> = 0.50).</td>
         <td>Zero-Information Stochastic</td>
       </tr>
       <tr>
         <td><strong>10. Hard Joss</strong></td>
-        <td>Plays Tit for Tat, but randomly defects with probability $p=0.10$ after opponent cooperation.</td>
+        <td>Plays Tit for Tat, but randomly defects with probability <i>p</i> = 0.10 after opponent cooperation.</td>
         <td>Opportunistic Exploiter</td>
       </tr>
       <tr>
         <td><strong>11. Soft Joss</strong></td>
-        <td>Plays Tit for Tat, but randomly cooperates with probability $p=0.10$ after opponent defection.</td>
+        <td>Plays Tit for Tat, but randomly cooperates with probability <i>p</i> = 0.10 after opponent defection.</td>
         <td>Stochastic Conciliator</td>
       </tr>
       <tr>
@@ -763,17 +771,17 @@ All 15 opponent strategies are implemented as pure, immutable TypeScript functio
       </tr>
       <tr>
         <td><strong>13. Feld</strong></td>
-        <td>Cooperation probability decays linearly from $1.0$ (round 1) toward $0.5$ over the trial.</td>
+        <td>Cooperation probability decays linearly from 1.0 (round 1) toward 0.5 over the trial.</td>
         <td>Gradual Disengagement</td>
       </tr>
       <tr>
         <td><strong>14. Alternator</strong></td>
-        <td>Strictly alternates $C, D, C, D, \dots$ regardless of opponent actions.</td>
+        <td>Strictly alternates <i>C, D, C, D, \dots</i> regardless of opponent actions.</td>
         <td>Deterministic Cycler</td>
       </tr>
       <tr>
         <td><strong>15. Go By Majority</strong></td>
-        <td>Plays the opponent's historical modal action; defaults to $C$ on equal splits.</td>
+        <td>Plays the opponent's historical modal action; defaults to <i>C</i> on equal splits.</td>
         <td>Statistical Majority Learner</td>
       </tr>
     </tbody>
@@ -787,32 +795,32 @@ Upon trial completion, the application calculates eight psychological dimensions
 
 <div class="card-grid">
   <div class="metric-box">
-    <h4>1. Cooperation Rate ($CR$)</h4>
+    <h4>1. Cooperation Rate (CR)</h4>
     <div class="formula">CR = &Sigma; C_p[t] / N</div>
-    <p>Overall proportion of cooperative moves across all $N$ rounds.</p>
+    <p>Overall proportion of cooperative moves across all <i>N</i> rounds.</p>
   </div>
   <div class="metric-box">
-    <h4>2. Conditional Cooperation ($CCR$)</h4>
+    <h4>2. Conditional Cooperation (CCR)</h4>
     <div class="formula">CCR = &Sigma; (C_p[t] &middot; C_o[t-1]) / &Sigma; C_o[t-1]</div>
-    <p>Probability of cooperating immediately after opponent cooperation ($t \ge 2$).</p>
+    <p>Probability of cooperating immediately after opponent cooperation (<i>t</i> &ge; 2).</p>
   </div>
   <div class="metric-box">
-    <h4>3. Retaliation Index ($RI$)</h4>
+    <h4>3. Retaliation Index (RI)</h4>
     <div class="formula">RI = &Sigma; (D_p[t] &middot; D_o[t-1]) / &Sigma; D_o[t-1]</div>
-    <p>Probability of punishing an opponent defection on the next round ($t \ge 2$).</p>
+    <p>Probability of punishing an opponent defection on the next round (<i>t</i> &ge; 2).</p>
   </div>
   <div class="metric-box">
-    <h4>4. Forgiveness Index ($FI$)</h4>
+    <h4>4. Forgiveness Index (FI)</h4>
     <div class="formula">FI = Mean(rounds from retaliatory D back to C)</div>
     <p>Average latency in rounds to restore cooperation following retaliatory defection.</p>
   </div>
   <div class="metric-box">
-    <h4>5. Reciprocity Correlation ($r$)</h4>
+    <h4>5. Reciprocity Correlation (<i>r</i>)</h4>
     <div class="formula">r = Pearson(C_p[t], C_o[t-1]), t &ge; 2</div>
-    <p>Pearson $r$ between participant action and opponent's previous choice ($N \ge 3$).</p>
+    <p>Pearson <i>r</i> between participant action and opponent's previous choice (<i>N</i> &ge; 3).</p>
   </div>
   <div class="metric-box">
-    <h4>6. Risk-Taking Tendency ($RTT$)</h4>
+    <h4>6. Risk-Taking Tendency (RTT)</h4>
     <div class="formula">RTT = &Sigma; (C_p[t] &middot; D_o[t-1]) / &Sigma; D_o[t-1]</div>
     <p>Propensity to cooperate directly following exploitation (vulnerability).</p>
   </div>
@@ -822,7 +830,7 @@ Upon trial completion, the application calculates eight psychological dimensions
     <p>Contrasting cognitive processing duration between prosocial and hostile acts.</p>
   </div>
   <div class="metric-box">
-    <h4>8. Switching Rate ($SR$)</h4>
+    <h4>8. Switching Rate (SR)</h4>
     <div class="formula">SR = &Sigma; 1[C_p[t] &ne; C_p[t-1]] / (N - 1)</div>
     <p>Frequency of strategy shifts, quantifying behavioral volatility vs. stability.</p>
   </div>
@@ -897,7 +905,7 @@ The development methodology adhered to a disciplined, test-driven engineering li
   <li><strong>Sprint 1 — Algorithmic Modelling &amp; Unit Test Validation:</strong> Authored pure TypeScript modules for all 15 Axelrod tournament strategies. Verified behavioral correctness using <code>Vitest</code>, covering first-move logic, all-cooperate responses, retaliatory cascades, and stochastic forgiveness bounds.</li>
   <li><strong>Sprint 2 — Zero-Latency Telemetry Architecture:</strong> Engineered the React client loop to avoid per-round HTTP calls. All round data, latency timestamps, and noise evaluations accumulate in local React state, followed by an atomic transactional commit upon trial termination.</li>
   <li><strong>Sprint 3 — Fastify &amp; SQLite WAL Persistence Engine:</strong> Scaffolded Fastify v5 with <code>better-sqlite3</code>. Formulated relational schemas (`sessions`, `rounds`, `reports`) bound by foreign key cascade constraints, executing all insertions within a single synchronous ACID transaction.</li>
-  <li><strong>Sprint 4 — Laboratory Pilot Evaluation ($N=6$):</strong> Administered trial runs with six university student participants to stress-test the data collection pipeline, UX clarity, and post-session strategy recognition accuracy.</li>
+  <li><strong>Sprint 4 — Laboratory Pilot Evaluation (<i>N</i> = 6):</strong> Administered trial runs with six university student participants to stress-test the data collection pipeline, UX clarity, and post-session strategy recognition accuracy.</li>
 </ul>
 
 <h2>5. Preliminary Empirical Findings: 6-Student Pilot Study</h2>
@@ -992,7 +1000,7 @@ To validate the platform under authentic laboratory conditions, an initial pilot
 </div>
 
 <div class="callout">
-  <p><strong>Empirical Reaction Time Asymmetry Finding:</strong> Across all 120 recorded pilot rounds, participants interacting with reciprocal, cooperative opponents (Tit for Tat, Generous Tit for Tat) exhibited significantly faster decision times when cooperating ($\mu = 403\text{ ms}$) than when defecting ($\mu = 695\text{ ms}$). This demonstrates high-fluency prosocial heuristics. Conversely, when facing exploitative opponents (Always Defect, Grim Trigger), reaction times inverted: participants defected rapidly ($\mu = 365\text{ ms}$) but exhibited prolonged deliberation when attempting cooperation ($\mu = 660\text{ ms}$). This supports the Social Heuristics Hypothesis in repeated strategic dilemmas.</p>
+  <p><strong>Empirical Reaction Time Asymmetry Finding:</strong> Across all 120 recorded pilot rounds, participants interacting with reciprocal, cooperative opponents (Tit for Tat, Generous Tit for Tat) exhibited significantly faster decision times when cooperating (&mu; = 403 ms) than when defecting (&mu; = 695 ms). This demonstrates high-fluency prosocial heuristics. Conversely, when facing exploitative opponents (Always Defect, Grim Trigger), reaction times inverted: participants defected rapidly (&mu; = 365 ms) but exhibited prolonged deliberation when attempting cooperation (&mu; = 660 ms). This supports the Social Heuristics Hypothesis in repeated strategic dilemmas.</p>
 </div>
 
 <h2>6. Key Design Decisions &amp; Technical Challenges Overcome</h2>
